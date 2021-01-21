@@ -1,8 +1,6 @@
 package com.company;
 
-import org.virtualbox_6_1.VBoxEventType;
-
-import java.util.List;
+import java.io.IOException;
 
 public class Main {
 
@@ -14,9 +12,19 @@ public class Main {
 
         VBoxManager vBoxMgr = new VBoxManager();
         String result = vBoxMgr.getVBoxVersion();
+        try {
 
-        vBoxMgr.createVM();
+        //vBoxMgr.createVM();
+        vBoxMgr.openLastVM();
 
         System.out.println(result);
+
+        System.out.println("done, press Enter...");
+            int ch = System.in.read();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        vBoxMgr.cleanup();
     }
 }

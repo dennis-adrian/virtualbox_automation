@@ -18,6 +18,7 @@ package com.company;
  * hope that it will be useful, but WITHOUT ANY WARRANTY of any kind.
  */
 
+import jdk.jfr.EventType;
 import org.virtualbox_6_1.*;
 import java.util.List;
 import java.util.Arrays;
@@ -87,7 +88,7 @@ public class TestVBox
         es.unregisterListener(listener);
     }
 
-    static void testEnumeration(VirtualBoxManager mgr, IVirtualBox vbox)
+    /* static void testEnumeration(VirtualBoxManager mgr, IVirtualBox vbox)
     {
         List<IMachine> machs = vbox.getMachines();
         for (IMachine m : machs)
@@ -123,7 +124,7 @@ public class TestVBox
         }
         // process system event queue
         mgr.waitForEvents(0);
-    }
+    } */
 
     static boolean progressBar(VirtualBoxManager mgr, IProgress p, long waitMillis)
     {
@@ -142,7 +143,7 @@ public class TestVBox
 
     static void testStart(VirtualBoxManager mgr, IVirtualBox vbox)
     {
-        IMachine m = vbox.getMachines().get(0);
+        IMachine m = vbox.getMachines().get(2);
         String name = m.getName();
         System.out.println("\nAttempting to start VM '" + name + "'");
 
@@ -226,7 +227,7 @@ public class TestVBox
     {
         VirtualBoxManager mgr = VirtualBoxManager.createInstance(null);
 
-        boolean ws = false;
+        /* boolean ws = false;
         String  url = null;
         String  user = null;
         String  passwd = null;
@@ -251,7 +252,7 @@ public class TestVBox
                 e.printStackTrace();
                 System.out.println("Cannot connect, start webserver first!");
             }
-        }
+        } */
 
         try
         {
@@ -259,7 +260,7 @@ public class TestVBox
             if (vbox != null)
             {
                 System.out.println("VirtualBox version: " + vbox.getVersion() + "\n");
-                testEnumeration(mgr, vbox);
+                //testEnumeration(mgr, vbox);
                 testReadLog(mgr, vbox);
                 testStart(mgr, vbox);
                 testEvents(mgr, vbox.getEventSource());
@@ -286,14 +287,14 @@ public class TestVBox
 
         // process system event queue
         mgr.waitForEvents(0);
-        if (ws)
+        /* if (ws)
         {
             try {
                 mgr.disconnect();
             } catch (VBoxException e) {
                 e.printStackTrace();
             }
-        }
+        } */
 
         mgr.cleanup();
 
